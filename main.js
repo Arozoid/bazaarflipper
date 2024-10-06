@@ -97,4 +97,8 @@ function updateWebsite() {
     });
 }
 
+// Starting website update
+updateWebsite()
+
+// Setup a loop to update the website every 5 seconds
 setInterval(updateWebsite, 5000)
