@@ -23,8 +23,7 @@ async function getData(url) {
   }
 
 // Add orders to website
-function addOrders(bzInfo, itemInfo) {
-      
+function addOrders(bzInfo, itemInfo) {     
     // Obtains all keys in the dictionary
     let dataKeys = Object.keys(bzInfo);
   
@@ -80,10 +79,10 @@ function updateWebsite() {
         // Code if the request succeeds to get the item catalog
         .then((data) => {
         	// Put item catalog into one variable
-          let itemInfo = data;
+          let itemData = data;
           
           // Add orders to the website
-          addOrders(bazaarInfo, itemInfo);
+          addOrders(bazaarInfo, itemData);
         })
 
         // Code if the request fails to get the item catalog
