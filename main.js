@@ -79,7 +79,10 @@ function addOrders(bzInfo, itemInfo) {
         
         // Product demand
         productDemand = document.createElement("p")
-        productDemand.textContent = `Demend: ${product['quick_status']['buyMovingWeek'].toFixed(1)}`
+        productDemand.textContent = `Demand: ${product['quick_status']['buyMovingWeek'].toFixed(1)}`
+        
+        productCoinsPerHour = document.createElement("p")
+        productCoinsPerHour.textContent = `Coins per hour (no tax): ${Math.sqrt((product['quick_status']['buyMovingWeek'] / 7 / 24) * (product['quick_status']['sellMovingWeek'] / 7 / 24)) * (product['quick_status']['buyPrice'] - product['quick_status']['sellPrice'])}`
         
       } else {
         // If something is wrong with the API
@@ -91,6 +94,7 @@ function addOrders(bzInfo, itemInfo) {
       divider.appendChild(productSellPrice)
       divider.appendChild(productSupply)
       divider.appendChild(productDemand)
+      divider.appendChild(productCoinsPerHour)
       
       // Append product data to the "bz" divider
       document.getElementById("bz").appendChild(divider);
