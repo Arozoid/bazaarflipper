@@ -68,18 +68,18 @@ function addOrders(bzInfo, itemInfo) {
 }
 
 function updateWebsite() {
-  getData("https://api.slothpixel.me/api/skyblock/bazaar")
+  getData("https://api.hypixel.net/v2/skyblock/bazaar")
     // Code if the request succeeds to get Bazaar data
     .then((data) => {
       // Store Bazaar data
-      let bazaarInfo = data;
+      let bazaarInfo = data['products'];
 
       // Get list of all items in Skyblock
-      getData("https://api.slothpixel.me/api/skyblock/items")
+      getData("https://api.hypixel.net/v2/resources/skyblock/items")
         // Code if the request succeeds to get the item catalog
         .then((data) => {
         	// Put item catalog into one variable
-          let itemData = data;
+          let itemData = data['items'];
           
           // Add orders to the website
           addOrders(bazaarInfo, itemData);
