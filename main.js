@@ -33,37 +33,67 @@ function addOrders(bzInfo, itemInfo) {
     // For loop for all bazaar items
     for (let i = 0; i < dataKeys.length; i++) {
       // Create product element
-      let element = document.createElement("p");
+      let divider = document.createElement("div");
   
       // Get product info
       let product = bzInfo[dataKeys[i]];
           
       // Create variable for the products corresponding data in the item list
-      let product_item;
-          
+      let productItem;
+      
+      try {
+      	productItem = itemInfo.find(dict => dict['id'] === dataKeys[i]);
+      } catch(err) {}
+      
       // Check for bazaar specific items
       if (dataKeys[i] == "BAZAAR_COOKIE") {
         // If it is a "bazaar cookie", add the name as "Booster Cookie"
-        product_item = {'name': "Booster Cookie"}
-      } else if (itemInfo[dataKeys[i]]) {
-        // If the item does not exist in the item catalog, format the ID and make it the name
-        product_item = itemInfo[dataKeys[i]]
-      } else {
+        productItem = {'name': "Booster Cookie"};
+      } else if (productItem) {
         // If the item is in the item catalog
-        product_item = {'name': formatTitle(dataKeys[i])}
+        productItem = productItem;
+      } else {
+        // If the item does not exist in the item catalog, format the ID and make it the name
+        productItem = {'name': formatTitle(dataKeys[i])};
       }
           
       // Double check if API is working properly before reading item data
       if (product && product.hasOwnProperty('quick_status')) {
         // If all goes normal
-        element.textContent = `${product_item['name']}: ${JSON.stringify(product['quick_status'])}`;
+        
+        // Product name
+        productName = document.createElement("p");
+        productName.textContent = `${productItem['name']}: `;
+        
+        // Product buy price
+        productBuyPrice = document.createElement("p")
+        productBuyPrice.textContent = `Buy Price: ${product['quick_status']['buyPrice'].toFixed(1)}`
+        
+        // Product sell price
+        productSellPrice = document.createElement("p")
+        productSellPrice.textContent = `Sell Price: ${product['quick_status']['sellPrice'].toFixed(1)}`
+        
+        // Product supply
+        productSupply = document.createElement("p")
+        productSupply.textContent = `Supply: ${product['quick_status']['sellMovingWeek'].toFixed(1)}`
+        
+        // Product demand
+        productDemand = document.createElement("p")
+        productDemand.textContent = `Demend: ${product['quick_status']['buyMovingWeek'].toFixed(1)}`
+        
       } else {
         // If something is wrong with the API
-        element.textContent = "Unable to read item data";
+        productName = document.createElement("p");
+        productName.textContent = "Unable to read item data";
       }
-          
+      divider.appendChild(productName)
+      divider.appendChild(productBuyPrice)
+      divider.appendChild(productSellPrice)
+      divider.appendChild(productSupply)
+      divider.appendChild(productDemand)
+      
       // Append product data to the "bz" divider
-      document.getElementById("bz").appendChild(element);
+      document.getElementById("bz").appendChild(divider);
   }
 }
 
@@ -96,9 +126,6 @@ function updateWebsite() {
       console.error(error);
     });
 }
-
-// Starting website update
-updateWebsite()
 
 // Update the website every 5 seconds
 setInterval(updateWebsite, 5000)
