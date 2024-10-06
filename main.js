@@ -24,8 +24,6 @@ async function getData(url) {
 
 // Add orders to website
 function addOrders(bzInfo, itemInfo) {
-    // Put item list in one variable
-    let itemInfo = data;
       
     // Obtains all keys in the dictionary
     let dataKeys = Object.keys(bzInfo);
@@ -81,7 +79,10 @@ function updateWebsite() {
       getData("https://api.slothpixel.me/api/skyblock/items")
         // Code if the request succeeds to get the item catalog
         .then((data) => {
+        	// Put item catalog into one variable
           let itemInfo = data;
+          
+          // Add orders to the website
           addOrders(bazaarInfo, itemInfo);
         })
 
@@ -100,5 +101,5 @@ function updateWebsite() {
 // Starting website update
 updateWebsite()
 
-// Setup a loop to update the website every 5 seconds
+// Update the website every 5 seconds
 setInterval(updateWebsite, 5000)
