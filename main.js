@@ -26,12 +26,12 @@ function addOrders(bzInfo) {
     .then((data) => {
       let itemInfo = data;
       
-      let dataKeys = Object.keys(bzInfo['products']);
+      let dataKeys = Object.keys(bzInfo);
   		document.getElementById("bz").innerHTML = "";
       
       for (let i = 0; i < dataKeys.length; i++) {
         let element = document.createElement("p");
-        let product = bzInfo['products'][dataKeys[i]];
+        let product = bzInfo[dataKeys[i]];
         
         let product_item;
         
@@ -58,7 +58,7 @@ function addOrders(bzInfo) {
 }
 
 setInterval(() => {
-getData("https://api.hypixel.net/v2/skyblock/bazaar")
+getData("https://api.slothpixel.me/api/skyblock/bazaar")
   .then((data) => {
   	let bazaarInfo = data;
     addOrders(bazaarInfo);
