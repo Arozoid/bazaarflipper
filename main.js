@@ -57,13 +57,15 @@ function addOrders(bzInfo) {
     });
 }
 
-setInterval(() => {
-getData("https://api.slothpixel.me/api/skyblock/bazaar")
-  .then((data) => {
-  	let bazaarInfo = data;
-    addOrders(bazaarInfo);
-  })
-  .catch((error) => {
-    console.error(error);
-  });
-  }, 5000)
+function updateWebsite() {
+  getData("https://api.slothpixel.me/api/skyblock/bazaar")
+    .then((data) => {
+      let bazaarInfo = data;
+      addOrders(bazaarInfo);
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+}
+
+setInterval(updateWebsite, 5000)
