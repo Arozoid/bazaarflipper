@@ -35,10 +35,12 @@ function addOrders(bzInfo) {
         
         let product_item;
         
-        if (dataKeys[i].indexOf("ENCHANTMENT_") !== -1 || dataKeys[i].indexOf("ESSENCE_") !== -1) {
-        	product_item = {'name': formatTitle(dataKeys[i])}
+        if (dataKeys[i] == "BAZAAR_COOKIE") {
+          product_item = {'name': "Booster Cookie"}
+        } else if (itemInfo[dataKeys[i]]) {
+          product_item = itemInfo[dataKeys[i]]
         } else {
-        	product_item = itemInfo[dataKeys[i]]
+        	product_item = {'name': formatTitle(dataKeys[i])}
         }
         
         if (product && product.hasOwnProperty('quick_status')) {
