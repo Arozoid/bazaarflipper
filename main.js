@@ -69,7 +69,7 @@ function addOrders(bzInfo, itemInfo) {
     if (product[id]["item"]) {
       product[id]["item"] = product[id]["item"]
     } else {
-      product[id]["item"] = formatTitle(id)
+      product[id]["item"] = { name: formatTitle(id) }
     }
   }
 
