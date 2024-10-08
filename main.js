@@ -1,7 +1,12 @@
+// Tax
+function calcTax(x, percent) {
+	return x * (1 - (percent / 100))
+}
+
 // Calculates coins per hour.
-function getCoinsPerHour(buyPrice, sellPrice, supply, demand) {
+function getCoinsPerHour(buyPrice, sellPrice, supply, demand, tax) {
   let hourlyTransactions = Math.min(supply, demand) / 168
-  let profitMargin = buyPrice - sellPrice
+  let profitMargin = calcTax(buyPrice, tax) - calcTax(sellPrice, 0 - tax)
   let totalProfit = profitMargin * hourlyTransactions
   return totalProfit
 }
@@ -57,6 +62,7 @@ function addOrders(bzInfo, itemInfo) {
         bzInfo[id]["quick_status"]["sellPrice"],
         bzInfo[id]["quick_status"]["sellMovingWeek"],
         bzInfo[id]["quick_status"]["buyMovingWeek"],
+        1.25
       ),
 
       // Define item info
