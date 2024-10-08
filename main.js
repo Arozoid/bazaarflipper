@@ -91,25 +91,25 @@ function addOrders(bzInfo, itemInfo) {
 
     // Name
     let name = document.createElement("p")
-    name.textContent = `${product[id]["item"]["name"]}:`
+    name.innerHTML = `${product[id]["item"]["name"]}`
 
     // Buy and sell price
     let buyPrice = document.createElement("p")
-    buyPrice.textContent = `Buy Price: ${product[id]["buyPrice"].toFixed(1)}`
+    buyPrice.innerHTML = `<b>Buy Price</b>: ${numberWithCommas(product[id]["buyPrice"].toFixed(1))}`
 
     let sellPrice = document.createElement("p")
-    sellPrice.textContent = `Sell Price: ${product[id]["sellPrice"].toFixed(1)}`
+    sellPrice.innerHTML = `<b>Sell Price</b>: ${numberWithCommas(product[id]["sellPrice"].toFixed(1))}`
 
     // Supply and demand
     let supply = document.createElement("p")
-    supply.textContent = `Supply: ${product[id]["supply"].toFixed(1)}`
+    supply.innerHTML = `<b>Supply</b>: ${numberWithCommas(product[id]["supply"].toFixed(1))}`
 
     let demand = document.createElement("p")
-    demand.textContent = `Demand: ${product[id]["demand"].toFixed(1)}`
+    demand.innerHTML = `<b>Demand</b>: ${numberWithCommas(product[id]["demand"].toFixed(1))}`
 
     // Coins per hour
     let coinsPerHour = document.createElement("p")
-    coinsPerHour.textContent = `Coins per hour (no tax): ${product[id]["coinsPerHour"].toFixed(1)}`
+    coinsPerHour.innerHTML = `<b>Coins per hour</b>: ${numberWithCommas(product[id]["coinsPerHour"].toFixed(1))}`
 
     bzDiv.appendChild(name)
     bzDiv.appendChild(buyPrice)
