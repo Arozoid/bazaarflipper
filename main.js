@@ -59,10 +59,17 @@ function addOrders(bzInfo, itemInfo) {
         bzInfo[id]["quick_status"]["buyMovingWeek"],
       ),
 
-      // Item info
-      item: itemInfo.find((dict) => dict["id"] === id)
-        ? itemInfo.find((dict) => dict["id"] === id)["id"]
-        : formatTitle(id),
+      // Define item info
+      item: 0,
+    }
+
+    // Set item info
+    product[id]["item"] = itemInfo.find((dict) => dict["id"] === id)
+
+    if (product[id]["item"]) {
+      product[id]["item"] = product[id]["item"]
+    } else {
+      product[id]["item"] = formatTitle(id)
     }
   }
 
@@ -88,21 +95,21 @@ function addOrders(bzInfo, itemInfo) {
 
     // Buy and sell price
     let buyPrice = document.createElement("p")
-    buyPrice.textContent = `Buy Price: ${product[id]["buyPrice"]}`
+    buyPrice.textContent = `Buy Price: ${product[id]["buyPrice"].toFixed(1)}`
 
     let sellPrice = document.createElement("p")
-    sellPrice.textContent = `Sell Price: ${product[id]["sellPrice"]}`
+    sellPrice.textContent = `Sell Price: ${product[id]["sellPrice"].toFixed(1)}`
 
     // Supply and demand
     let supply = document.createElement("p")
-    supply.textContent = `Supply: ${product[id]["supply"]}`
+    supply.textContent = `Supply: ${product[id]["supply"].toFixed(1)}`
 
     let demand = document.createElement("p")
-    demand.textContent = `Demand: ${product[id]["demand"]}`
+    demand.textContent = `Demand: ${product[id]["demand"].toFixed(1)}`
 
     // Coins per hour
     let coinsPerHour = document.createElement("p")
-    coinsPerHour.textContent = `Coins per hour (no tax): ${product[id]["coinsPerHour"]}`
+    coinsPerHour.textContent = `Coins per hour (no tax): ${product[id]["coinsPerHour"].toFixed(1)}`
 
     bzDiv.appendChild(name)
     bzDiv.appendChild(buyPrice)
